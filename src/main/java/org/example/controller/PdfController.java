@@ -130,7 +130,7 @@ public class PdfController {
     }
 
     @GetMapping("/file/{id}")
-    public ResponseEntity<byte[]> getPdfFile(@PathVariable String id) {
+    public ResponseEntity<byte[]> getPdfFile(@PathVariable Long id) {
         PdfFile pdf = pdfService.getPdfById(id);
 
         if (pdf == null) {
