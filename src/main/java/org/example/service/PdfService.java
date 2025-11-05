@@ -8,17 +8,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PdfService {
 
     @Autowired
-    private  PdfRepository pdfRepository;
+    private PdfRepository pdfRepository;
 
-
-
-    // ✅ Upload PDF with username (no Lombok builder)
+    // ✅ Upload PDF with username
     public void uploadPdf(MultipartFile file, String username) throws IOException {
         PdfFile pdf = new PdfFile();
         pdf.setFileName(file.getOriginalFilename());
@@ -29,23 +26,20 @@ public class PdfService {
         pdfRepository.save(pdf);
     }
 
-
+    // ✅ Get all PDFs
     public List<PdfFile> getAllPdfs() {
         return pdfRepository.findAll();
     }
 
- //   public PdfFile getPdfById(Long id) {
-   //     return pdfRepository.findById(id)
-     //           .orElseThrow(() -> new RuntimeException("PDF not found with id: " + id));
-    //}
+    // ✅ Get PDF by ID
+    public PdfFile getPdfById(Long id) {
+        return pdfRepository.findById(id).orElse(null);
+    }
 
-    // ✅ New method
+    // ✅ Get PDFs by username
     public List<PdfFile> getPdfsByUsername(String username) {
         return pdfRepository.findByUploadedBy(username);
     }
 
-    // ✅ Get single PDF by ID
- public PdfFile getPdfById(Long id) {
-    return pdfRepository.findById(id).orElse(null);
-}
+
 }
