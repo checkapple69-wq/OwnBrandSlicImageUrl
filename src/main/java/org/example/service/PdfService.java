@@ -34,10 +34,10 @@ public class PdfService {
         return pdfRepository.findAll();
     }
 
-    public PdfFile getPdfById(Long id) {
-        return pdfRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("PDF not found with id: " + id));
-    }
+ //   public PdfFile getPdfById(Long id) {
+   //     return pdfRepository.findById(id)
+     //           .orElseThrow(() -> new RuntimeException("PDF not found with id: " + id));
+    //}
 
     // ✅ New method
     public List<PdfFile> getPdfsByUsername(String username) {
