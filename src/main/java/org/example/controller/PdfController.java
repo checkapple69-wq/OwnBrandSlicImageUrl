@@ -119,7 +119,9 @@ public class PdfController {
                     map.put("uploadedBy", pdf.getUploadedBy());
                     map.put("contentType", pdf.getContentType());
                     // 👇 Instead of Base64, return a Blob URL endpoint
-                    map.put("blobUrl", "http://localhost:8080/api/pdf/file/" + pdf.getId());
+                   //map.put("blobUrl", "http://localhost:8080/api/pdf/file/" + pdf.getId());
+                    map.put("blobUrl", "https://ownbrandslicimageurl.onrender.com/api/pdf/file/" + pdf.getId());
+
                     return map;
                 })
                 .toList();
