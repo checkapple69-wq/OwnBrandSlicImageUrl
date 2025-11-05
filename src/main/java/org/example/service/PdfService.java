@@ -45,8 +45,7 @@ public class PdfService {
     }
 
     // ✅ Get single PDF by ID
-    public PdfFile getPdfById(String id) {
-        Optional<PdfFile> pdf = pdfRepository.findById(Long.valueOf(id));
-        return pdf.orElse(null);
-    }
+ public PdfFile getPdfById(Long id) {
+    return pdfRepository.findById(id).orElse(null);
+}
 }
