@@ -94,8 +94,9 @@ public class PdfController {
     }
 
     // Get PDFs for a user with image URLs (only if conversion succeeds)
-    @GetMapping("/users/{username}")
-    public ResponseEntity<List<Map<String, Object>>> getPdfsByUserBlob(@PathVariable String username) {
+   @GetMapping("/users/{username}")
+public ResponseEntity<List<Map<String, Object>>> getPdfsByUserBlob(@PathVariable String username) {
+    try {
         List<PdfFile> pdfs = pdfService.getPdfsByUsername(username);
         if (pdfs.isEmpty()) return ResponseEntity.status(404).body(List.of());
 
@@ -111,12 +112,18 @@ public class PdfController {
             if (imageBytes != null) {
                 map.put("imageUrl", "https://ownbrandslicimageurl.onrender.com/api/pdf/file-image/" + pdf.getId());
             } else {
-                map.put("imageUrl", null); // fallback
+                map.put("imageUrl", null);
             }
 
             result.add(map);
         }
 
         return ResponseEntity.ok(result);
+    } catch (Exception e) {
+        e.printStackTrace(); // log the exact error
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(List.of(Map.of("error", e.getMessage())));
     }
+}
+
 }
